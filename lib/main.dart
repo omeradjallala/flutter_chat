@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'inputPart.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
-  static List<String> tab = ["Omer", "Carole"];
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<String> tab = ["Omer", "Carole"];
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +25,18 @@ class MyApp extends StatelessWidget {
           ),
           body: Column(children: [
             Column(
-                children: tab.asMap().entries.map((value) {
-              bool h = (value.key % 2) != 0;
-              Color color = h ? Colors.green : Colors.yellow;
-              return (UserMsg(value.value, color));
-            }).toList()),
+              children: tab.asMap().entries.map((value) {
+                bool h = (value.key % 2) != 0;
+                Color color = h ? Colors.green : Colors.yellow;
+                return (UserMsg(value.value, color));
+              }).toList()
+            ),
             InputPart(
+              // onTabChanged: updateMsg,
               onTabChanged: (newTab) {
-                tab = newTab;
-                // setState(() {
-                //   tab = newTab;
-                // });
-                // print("tab");
-                // print(tab);
+                setState(() {
+                  tab = [...tab, newTab];
+                });
               },
             ),
           ]),

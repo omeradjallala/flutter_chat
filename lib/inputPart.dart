@@ -27,8 +27,8 @@ class _InputPartState extends State<InputPart> {
         onPressed: () {
           String enteredText = _controller.text;
           print('Entered text: $enteredText');
-          List<String> newTab = [...MyApp.tab, enteredText];
-          widget.onTabChanged(newTab);
+          // List<String> newTab = [...MyApp.tab, enteredText];
+          widget.onTabChanged(enteredText);
           _controller.clear();
           // Vous pouvez utiliser la valeur entrée dans l'application comme bon vous semble
         },
